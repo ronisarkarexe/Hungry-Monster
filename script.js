@@ -1,13 +1,23 @@
 document.getElementById("Search").addEventListener("click",function(){
     const foodSearch = document.getElementById("Search-food").value;
+    document.getElementById("foodDetailsMore").innerHTML = "";
+    if(foodSearch != ""){
+        fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${foodSearch}`)
+        .then(response => response.json())
+        .then(data => hungryMonsterFood(data));
 
-fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${foodSearch}`)
-.then(response => response.json())
-.then(data => hungryMonsterFood(data));
+    }
 
 const hungryMonsterFood = food => {
     let foodItems = food.meals;
+    if(foodItems === null){
+        document.getElementById("foodNotify").style.display = "block";
+    }
+    else{
+        document.getElementById("foodNotify").style.display = "none";
+    }
     let foodMonster = document.getElementById('foodItemsHungryMonster');
+    foodMonster.innerHTML = "";
    
     foodItems.forEach(food => {
         const div = document.createElement('div');
@@ -31,7 +41,9 @@ const countryDetails = foodId => {
     }
 
     const hungryMonsterFoodDetails = food => {
+
         const foodDetailsMore = document.getElementById("foodDetailsMore")
+        
         foodDetailsMore.innerHTML =`
             <img src="${food.strMealThumb}">
             <h5>${food.strMeal}</h5>
