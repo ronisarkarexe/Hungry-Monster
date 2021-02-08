@@ -1,83 +1,86 @@
+// after click even handler
 document.getElementById("Search").addEventListener("click",function(){
+    //declare variable for search Button
     const foodSearch = document.getElementById("Search-food").value;
+    //clear input after search
     document.getElementById("foodDetailsMore").innerHTML = "";
+    //verify input for alart
     if(foodSearch != ""){
         fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${foodSearch}`)
         .then(response => response.json())
-        .then(data => hungryMonsterFood(data));
+        .then(data => hungryMonsterFoodItems(data));
 
     }
 
-const hungryMonsterFood = food => {
+const hungryMonsterFoodItems = food => {
     let foodItems = food.meals;
+    // food alart for no items
     if(foodItems === null){
         document.getElementById("foodNotify").style.display = "block";
     }
     else{
+        // display previous massage not for found
         document.getElementById("foodNotify").style.display = "none";
     }
-    let foodMonster = document.getElementById('foodItemsHungryMonster');
-    foodMonster.innerHTML = "";
+    let foodItemsHungry = document.getElementById('foodItemsHungryMonster');
+    foodItemsHungry.innerHTML = "";
    
+
     foodItems.forEach(food => {
+        // 
         const div = document.createElement('div');
-        div.className = 'food-item';
-            const foodInfo = `
-                <img id="image-size" src="${food.strMealThumb}">
-                <h5 id="food-list">${food.strMeal}</h5>
-                <button onclick="countryDetails('${food.idMeal}')">Details</button>
-            `;
+        div.className = 'food-item'; //className for div
+        // img title to div sent id for function
+        const foodInfo = `
+        <a href="#" onclick="foodIdDetails('${food.idMeal}')"><img id="image-size" src="${food.strMealThumb}"></a>
+        <h5 onclick="foodIdDetails('${food.idMeal}')"><a href="#" id="food-list">${food.strMeal}</a></h5>
+        `;
         div.innerHTML = foodInfo;
-        foodMonster.appendChild(div);
+        foodItemsHungry.appendChild(div);
     })
 }
 })
 
-const countryDetails = foodId => {
+const foodIdDetails = foodId => {
         const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${foodId}`
+        // fetch item using id
         fetch(url)
         .then(response => response.json())
         .then(data => hungryMonsterFoodDetails(data.meals[0]))
     }
 
     const hungryMonsterFoodDetails = food => {
-
+        // img tittles and Ingredients data catch
         const foodDetailsMore = document.getElementById("foodDetailsMore")
-        
+        // food details
         foodDetailsMore.innerHTML =`
             <img src="${food.strMealThumb}">
-            <h5>${food.strMeal}</h5>
+            <h4>${food.strMeal}</h4>
+            <h5>Ingredients:</h5>
+
             <ul>
                 <li>
-                    <i class="bi bi-check"></i>
                     ${food.strIngredient1}
                 </li>
                 <li>
-                    <i class="bi bi-check"></i>
                     ${food.strIngredient2}
                 </li>
                 <li>
-                    <i class="fas fa-check-square"></i>
                     ${food.strIngredient3}
                 </li>
                 <li>
-                    <i class="fas fa-check-square"></i>
                     ${food.strIngredient4}
                 </li>
                 <li>
-                    <i class="fas fa-check-square"></i>
                     ${food.strIngredient5}
                 </li>
                 <li>
-                    <i class="fas fa-check-square"></i>
                     ${food.strIngredient6}
                 </li>
                 <li>
-                    <i class="fas fa-check-square"></i>
                     ${food.strIngredient7}
                 </li>
                 <li>
-                    <i class="fas fa-check-square"></i>
                     ${food.strIngredient8}
                 </li>
             </ul>

@@ -4,13 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap link -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <title>Document</title>
+    <title>Cooking master</title>
+    <!-- Css file link -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-   <section>
-    <div class="container">
+   <section class="container">
+       <!-- header section -->
+    <head>
+        <nav class="navbar navbar-expand-md navbar-dark">
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a id="nav-text-color" class="nav-link" href="#">Cooking master</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="mx-auto order-0">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a id="nav-text" class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="nav-text" class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="nav-text" class="nav-link" href="#">Recipes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="nav-text" class="nav-link" href="#">Blog</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </head>
+
+    <div>
+        <!-- search button section -->
         <div>
             <form class="col-md-6 m-auto py-5">
                 <div class="input-group mb-3">
@@ -21,18 +58,22 @@
                 </div>
             </form>
         </div>
+        <!-- Food Details -->
         <div id="foodDetailsMore">
     
         </div>
+        <!-- Food item list -->
         <div id="foodItemsHungryMonster">
     
         </div>
     </div>
+    <!-- wrong input value alart section -->
     <div class="notify-section">
         <p id="foodNotify" class="notify">Food Name Didn't Match, Please try again</p>
     </div>
    </section>
 
+   <!-- javascript link -->
    <script src="./script.js"></script>
 </body>
 </html>
